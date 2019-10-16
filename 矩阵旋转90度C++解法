@@ -1,0 +1,39 @@
+public class LeetcodeTest {
+	public static void main(String[] args) {
+		int[][] matrix = {{ 5, 1, 9,11},
+				  { 2, 4, 8,10},
+				  {13, 3, 6, 7},
+				  {15,14,12,16}};
+		Solution So = new Solution();
+		So.rotate(matrix);
+		for(int i=0; i<matrix.length;i++){
+			for(int j=0; j<matrix[0].length;j++){
+				System.out.print(matrix[i][j]+" ");
+			}
+			System.out.println();
+		}	
+	}
+}
+class Solution {
+    public void rotate(int[][] matrix) {
+       if(matrix == null || matrix.length == 0 || matrix[0].length == 0){
+    	   return;
+       }
+       int col = matrix.length-1;
+       for(int j=0; j<matrix.length/2; j++,col--){
+    	   int r = col;//记录最后
+    	   int c = 0;//记录开始
+    	   for(int i=j;i<col; i++){  
+    		  swap(matrix,i,j,r,i);  
+    		  swap(matrix,r,i,r-c,r);  
+    		  swap(matrix,r-c,r,j,r-c);
+    		  c++;
+    	   }
+       }
+    }
+    private void swap(int[][]matrix,int i1,int j1,int i2,int j2){
+    	int temp = matrix[i1][j1];
+    	matrix[i1][j1] = matrix[i2][j2];
+    	matrix[i2][j2] = temp;
+    }
+}
