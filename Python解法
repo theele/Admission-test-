@@ -1,0 +1,5 @@
+def is_palindrome(n):
+  n=str(n)
+  m=int(n[::-1])
+  n=int(n)
+  return n==m
