@@ -1,0 +1,72 @@
+/**
+ * Created by 76549 on 2019-05-08.
+ */
+public class AddNumber {
+    /**
+     * 递归实现链表想加
+     * @param ln1
+     * @param ln2
+     * @param carry
+     * @return
+     */
+    public static LinkNode addLinkNode(LinkNode ln1, LinkNode ln2, int carry) {
+        if (ln1 == null) ln1=new LinkNode(0);
+        if (ln2 == null) ln2 =new LinkNode(0);
+        LinkNode rLinkNode = new LinkNode(0);
+        int total = ln1.value + ln2.value+carry;
+        rLinkNode.value = total % 10;
+        carry = total / 10;
+        if (ln1.nextLinkNode != null || ln2.nextLinkNode != null||carry>0) {
+            rLinkNode.nextLinkNode = addLinkNode(ln1.nextLinkNode, ln2.nextLinkNode, carry);
+        }
+        return rLinkNode;
+    }
+
+    public static void main(String[] args) {
+        //节点1数字为719
+        LinkNode ln1a = new LinkNode(9);
+        LinkNode ln11b = new LinkNode(1);
+        LinkNode ln1c = new LinkNode(7);
+        ln1a.nextLinkNode = ln11b;
+        ln11b.nextLinkNode = ln1c;
+
+        //节点1数字为627
+        LinkNode ln2a = new LinkNode(7);
+        LinkNode ln2b = new LinkNode(2);
+        LinkNode ln2c = new LinkNode(6);
+        ln2a.nextLinkNode = ln2b;
+        ln2b.nextLinkNode = ln2c;
+
+        LinkNode rLinkNode = AddNumber.addLinkNode(ln1a, ln2a, 0);
+        System.out.println("逆序得到"+rLinkNode.toString());
+    }
+}
+
+
+package net.evecom;
+
+/**链表结构
+ * Created by 76549 on 2019-05-08.
+ */
+public class LinkNode {
+    int value;//本节点值
+    LinkNode nextLinkNode;//下一节点
+    public LinkNode(int value) {
+        this.value = value;
+    }
+
+    /**
+     * 逆向输出结果值
+     * @return
+     */
+    public String toString() {
+        StringBuffer s = new StringBuffer();
+        s.append(value);
+        LinkNode n = nextLinkNode;
+        while (n != null) {
+            s.append(n.value);
+            n = n.nextLinkNode;
+        }
+        return s.toString();
+    }
+}
